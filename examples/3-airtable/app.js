@@ -2,7 +2,7 @@ const result = document.querySelector('.result');
 
 const fetchData = async () => {
   try {
-    const { data } = await axios('/api/3-airtable');
+    const { data } = await axios('/api/3-airtable-complete');
     const products = data
       .map((prod) => {
         const { id, url, name, price } = prod;

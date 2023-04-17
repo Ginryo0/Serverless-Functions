@@ -13,7 +13,6 @@ exports.handler = async (event, ctx, cb) => {
   if (id) {
     try {
       const product = await airtable.retrieve(id);
-      console.log(product);
       if (product.error) {
         return {
           statusCode: 404,
