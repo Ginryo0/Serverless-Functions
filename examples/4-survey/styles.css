@@ -65,3 +65,8 @@ button {
   cursor: pointer;
   color: var(--clr-black);
 }
+
+button:hover i,
+button:active i {
+  color: var(--clr-primary-5);
+}
