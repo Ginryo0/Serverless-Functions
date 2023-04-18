@@ -8,6 +8,7 @@ const airtable = new Airtable({
   .table('survey');
 
 exports.handler = async (event, ctx, cb) => {
+  // console.log(event);
   const method = event.httpMethod;
   if (method === 'GET') {
     try {
@@ -22,11 +23,48 @@ exports.handler = async (event, ctx, cb) => {
         statusCode: 200,
         body: JSON.stringify(survey),
       };
-    } catch (error) {}
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: 'Server Error',
+      };
+    }
+  } else if (method === 'PUT') {
+    console.log(event.body);
+
+    try {
+      const { id, votes } = JSON.parse(event.body);
+      if (!id || !votes) {
+        return {
+          statusCode: 422,
+          body: 'Please provide valid values',
+        };
+      }
+      const fields = { votes: +votes + 1 };
+      const item = await airtable.update(id, { fields });
+      console.log(item);
+      if (item.error) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify(item),
+        };
+      }
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify(item),
+      };
+    } catch (error) {
+      return {
+        statusCode: 422,
+        body: 'Please provide valid values',
+      };
+    }
   }
 
+  // Default Response = InValid Methods
   return {
-    statusCode: 500,
-    body: 'Server Error',
+    statusCode: 405,
+    body: 'Please Provide a Valid Method [GET/PUT]',
   };
 };
