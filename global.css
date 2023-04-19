@@ -198,3 +198,10 @@ Examples
 .examples a:hover {
   color: var(--clr-primary-3);
 }
+
+/* Inputs */
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid var(--clr-primary-2);
+}
