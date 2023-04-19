@@ -12,7 +12,7 @@ form.addEventListener('submit', async (e) => {
   try {
     await axios.post('/api/6-newsletter', { email });
     form.innerHTML =
-      '<h4 class="success">Thanks for subscribing! Please check your email </h4>';
+      '<h4 class="success">Thanks for subscribing!</h4> <h5 class="sub-success">Please check your inbox for confirmation email to join our Potata newsletter. </h5>';
   } catch (err) {
     console.log(err.response);
     alert.style.display = 'block';
