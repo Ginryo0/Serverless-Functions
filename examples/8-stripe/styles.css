@@ -33,6 +33,12 @@ input {
   text-decoration: none;
 }
 
+.result-message span {
+  color: rgb(89, 111, 214);
+  font-weight: 600;
+  font-size: 13px;
+}
+
 .hidden {
   display: none;
 }
